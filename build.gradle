@@ -1,0 +1,56 @@
+plugins {
+  id 'application'
+  id 'java'
+  alias(libs.plugins.spring.boot)
+  alias(libs.plugins.spring.dependency.management)
+  id 'jacoco'
+  id 'maven-publish'
+  alias(libs.plugins.ben.manes.versions)
+  alias(libs.plugins.cyclonedx.bom)
+  alias(libs.plugins.gradle.git.properties)
+  alias(libs.plugins.avast.docker.compose)
+}
+
+group = 'uk.gov.hmcts.cp'
+version = System.getProperty('ARTEFACT_VERSION') ?: '0.0.999'
+
+apply {
+  from("$rootDir/gradle/dependencies/java-core.gradle")
+  from("$rootDir/gradle/dependencies/spring-core.gradle")
+  from("$rootDir/gradle/dependencies/spring-db.gradle")
+
+  from("$rootDir/gradle/github/repositories.gradle")
+  from("$rootDir/gradle/github/java.gradle")
+  from("$rootDir/gradle/github/dependency.gradle")
+  from("$rootDir/gradle/github/pmd.gradle")
+  from("$rootDir/gradle/github/test.gradle")
+  from("$rootDir/gradle/github/jar.gradle")
+
+  from("$rootDir/gradle/tasks/api-test.gradle")
+}
+
+springBoot {
+  buildInfo {
+    properties {
+      name = project.name
+      version = project.version.toString()
+    }
+  }
+}
+
+dependencies {
+  implementation libs.hmcts.crime.template
+
+  // --- Observability / Actuator / OTEL / Prometheus ---
+  implementation libs.spring.boot.starter.actuator
+  implementation libs.hibernate.validator
+  implementation libs.spring.boot.starter.opentelemetry
+  implementation libs.jjwt
+  testRuntimeOnly libs.junit.platform.launcher
+
+  // Should come in with the api
+  implementation libs.swagger.core
+
+  testImplementation(platform(libs.junit.bom))
+  testRuntimeOnly libs.junit.jupiter.engine
+}

@@ -20,7 +20,7 @@ class RootControllerIntegrationTest extends IntegrationTestBase {
     void setup() {
         entity = exampleRepository.save(
                 ExampleEntity.builder()
-                        .exampleText("Welcome to service-hmcts-springboot-template")
+                        .exampleText("Welcome to service-cp-crime-casehearing-results-validator")
                         .build()
         );
     }

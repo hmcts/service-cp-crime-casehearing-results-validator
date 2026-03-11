@@ -33,7 +33,7 @@ class JWTFilterIntegrationTest extends IntegrationTestBase {
     void setup() {
         entity = exampleRepository.save(
                 ExampleEntity.builder()
-                        .exampleText("Welcome to service-hmcts-springboot-template")
+                        .exampleText("Welcome to service-cp-crime-casehearing-results-validator")
                         .build()
         );
     }
@@ -48,7 +48,7 @@ class JWTFilterIntegrationTest extends IntegrationTestBase {
                 )
                 .andExpectAll(
                         status().isOk(),
-                        content().string(containsString("Welcome to service-hmcts-springboot-template"))
+                        content().string(containsString("Welcome to service-cp-crime-casehearing-results-validator"))
                 );
     }
 

@@ -19,7 +19,7 @@ class ExampleControllerIntegrationTest extends IntegrationTestBase {
     void endpoint_should_return_ok() throws Exception {
         ExampleEntity entity = exampleRepository.save(
                 ExampleEntity.builder()
-                        .exampleText("Welcome to service-hmcts-springboot-template")
+                        .exampleText("Welcome to service-cp-crime-casehearing-results-validator")
                         .build()
         );
         mockMvc.perform(get("/example/{id}", entity.getId()))

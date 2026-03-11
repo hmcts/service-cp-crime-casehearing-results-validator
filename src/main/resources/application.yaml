@@ -39,7 +39,7 @@ management:
         enabled: true                  # liveness/readiness groups
   metrics:
     tags:
-      service: service-hmcts-springboot-template
+      service: service-cp-crime-casehearing-results-validator
       cluster: ${CLUSTER_NAME:local}
       region: ${REGION:local}
   tracing:

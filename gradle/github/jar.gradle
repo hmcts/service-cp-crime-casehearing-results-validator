@@ -1,6 +1,12 @@
 jar {
-  // we dont need jar task which just creates *-plain.jar
-  enabled = false
+  enabled = true
+  archiveClassifier.set('plain')
+  manifest {
+    attributes(
+      'Implementation-Title': project.name,
+      'Implementation-Version': project.version.toString()
+    )
+  }
 }
 
 bootJar {
